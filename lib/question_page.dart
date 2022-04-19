@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:quizzy/classes/category_type.dart';
 import 'package:quizzy/classes/question.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -11,11 +12,11 @@ class QuestionPage extends StatefulWidget {
   }
 
   List<Question> questions = [
-    Question(answers: ["saa"], text: "saaaaaaaa", category: CategoryType.cars),
-    Question(answers: ["sbb"], text: "sssssss", category: CategoryType.cars),
-    Question(answers: ["scc"], text: "sdddd", category: CategoryType.cars),
-    Question(answers: ["sdd"], text: "sfff", category: CategoryType.cars),
-    Question(answers: ["seee"], text: "sasdwa", category: CategoryType.cars),
+    Question(text: "", answers: [""], category: CategoryType.math),
+    Question(text: "", answers: [""], category: CategoryType.math),
+    Question(text: "", answers: [""], category: CategoryType.math),
+    Question(text: "", answers: [""], category: CategoryType.math),
+    Question(text: "", answers: [""], category: CategoryType.math),
   ];
   Map<CategoryType, bool> categories;
   @override
@@ -67,65 +68,56 @@ class _QuestionPageState extends State<QuestionPage> {
             },
             child: AlertDialog(
               title: const Text("Results"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Text("Question 1 : "),
-                      widget.questions[0].checkCorrect() == true
-                          ? const Icon(Icons.check, color: Colors.green)
-                          : const Icon(
+              content: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: widget.questions.map((element) {
+                    if (element.checkCorrect()) {
+                      return Container(
+                        decoration: const BoxDecoration(
+                          border: Border(bottom: BorderSide()),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Text("Question " +
+                                  (widget.questions.indexOf(element) + 1)
+                                      .toString() +
+                                  " :"),
+                            ),
+                            const Icon(Icons.check, color: Colors.green),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Container(
+                        decoration: const BoxDecoration(
+                          border: Border(bottom: BorderSide()),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Text("Question " +
+                                  (widget.questions.indexOf(element) + 1)
+                                      .toString() +
+                                  " :"),
+                            ),
+                            const Icon(
                               Icons.close,
                               color: Colors.red,
-                            )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Question 2 : "),
-                      widget.questions[1].checkCorrect() == true
-                          ? const Icon(Icons.check, color: Colors.green)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.red,
-                            )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Question 3 : "),
-                      widget.questions[2].checkCorrect() == true
-                          ? const Icon(Icons.check, color: Colors.green)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.red,
-                            )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Question 4 : "),
-                      widget.questions[3].checkCorrect() == true
-                          ? const Icon(Icons.check, color: Colors.green)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.red,
-                            )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Question 5 : "),
-                      widget.questions[4].checkCorrect() == true
-                          ? const Icon(Icons.check, color: Colors.green)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.red,
-                            )
-                    ],
-                  ),
-                ],
+                            ),
+                            Flexible(
+                                child: Text("Correct answer : " +
+                                    element.correctAnswer))
+                          ],
+                        ),
+                      );
+                    }
+                  }).toList(),
+                ),
               ),
             ),
           );
