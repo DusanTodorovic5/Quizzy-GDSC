@@ -426,7 +426,7 @@ class _QuestionPageState extends State<QuestionPage> {
                   return Center(
                     child: CarouselSlider.builder(
                       options: CarouselOptions(
-                        height: MediaQuery.of(context).size.height * 0.75,
+                        height: MediaQuery.of(context).size.height * 0.70,
                         enlargeCenterPage: true,
                         enableInfiniteScroll: false,
                         autoPlay: false,

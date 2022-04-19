@@ -7,7 +7,7 @@ class Category extends StatefulWidget {
   CategoryType myCategory;
   String text;
 
-  bool selected = true;
+  bool selected = false;
   @override
   State<Category> createState() => _CategoryState();
 }

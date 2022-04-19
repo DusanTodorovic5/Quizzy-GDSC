@@ -118,7 +118,7 @@ class _MenuState extends State<Menu> {
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "Press on category to disable it!",
+                      "Select quiz topics you wish!",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
