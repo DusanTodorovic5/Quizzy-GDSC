@@ -65,13 +65,18 @@ class _ConnectPageState extends State<ConnectPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: connector!.fields.keys.map((element) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(element),
-                        const Icon(Icons.arrow_right),
-                        Text(connector!.fields[element]!),
-                      ],
+                    return Container(
+                      decoration: const BoxDecoration(
+                          border: Border(bottom: BorderSide()),
+                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(child: Text(element)),
+                          Flexible(child: Text(connector!.fields[element]!)),
+                        ],
+                      ),
                     );
                   }).toList(),
                 ),
@@ -100,8 +105,8 @@ class _ConnectPageState extends State<ConnectPage> {
                 Future.delayed(Duration.zero, () => showAnswers(context));
               },
               child: const Text(
-                "Submit",
-                style: TextStyle(fontSize: 25, color: Colors.white),
+                "Check answers",
+                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
               style: OutlinedButton.styleFrom(
                 shape: const StadiumBorder(),
@@ -137,12 +142,27 @@ class _ConnectPageState extends State<ConnectPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      snapshot.data!.text,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
+                    Flexible(
+                      child: Text(
+                        snapshot.data!.text,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 2),
+                    const Text(
+                      "Drag left fields to the right",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -212,9 +232,7 @@ class _ConnectPageState extends State<ConnectPage> {
                 fit: BoxFit.scaleDown,
                 child: Text(
                   element,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20),
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
                 ),
               ),
               height: MediaQuery.of(context).size.height / 12,
@@ -232,9 +250,7 @@ class _ConnectPageState extends State<ConnectPage> {
                 fit: BoxFit.scaleDown,
                 child: Text(
                   element,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20),
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
                 ),
               ),
             ),
