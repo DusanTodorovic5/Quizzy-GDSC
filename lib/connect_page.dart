@@ -1,0 +1,256 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:quizzy/classes/category_type.dart';
+import 'package:quizzy/classes/connector.dart';
+import 'package:quizzy/widgets/draggable_widget.dart';
+
+class ConnectPage extends StatefulWidget {
+  ConnectPage({Key? key, required this.categories}) : super(key: key);
+
+  Map<CategoryType, bool> categories;
+
+  @override
+  State<ConnectPage> createState() => _ConnectPageState();
+}
+
+class _ConnectPageState extends State<ConnectPage> {
+  double _deviceHeight = 0;
+  double _deviceWidth = 0;
+
+  late final Future<Connector> future_connector;
+  Connector? connector;
+
+  @override
+  void initState() {
+    future_connector = loadConnects();
+    super.initState();
+  }
+
+  Future<Connector> loadConnects() async {
+    final _json = await rootBundle.loadString('assets/draggable.json');
+
+    var parsed = json.decode(_json);
+
+    var list = parsed as List;
+
+    List<Connector> allConnectors = [];
+
+    for (var connector in list) {
+      var c = Connector.fromJson(connector);
+      if (widget.categories[c.category] == true) {
+        allConnectors.add(c);
+      }
+    }
+
+    allConnectors.shuffle();
+    connector = allConnectors.take(1).toList()[0];
+    return connector!;
+  }
+
+  void showAnswers(BuildContext context) {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).pop();
+            },
+            child: AlertDialog(
+              title: const Text("Correct Answers"),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: connector!.fields.keys.map((element) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(element),
+                        const Icon(Icons.arrow_right),
+                        Text(connector!.fields[element]!),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _deviceHeight = MediaQuery.of(context).size.height;
+    _deviceWidth = MediaQuery.of(context).size.width;
+    double navbar = MediaQuery.of(context).padding.bottom;
+    double topbar = MediaQuery.of(context).padding.top + 50;
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+        elevation: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                Future.delayed(Duration.zero, () => showAnswers(context));
+              },
+              child: const Text(
+                "Submit",
+                style: TextStyle(fontSize: 25, color: Colors.white),
+              ),
+              style: OutlinedButton.styleFrom(
+                shape: const StadiumBorder(),
+                side: const BorderSide(width: 2.0, color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.only(bottom: navbar, top: topbar),
+        width: _deviceWidth,
+        height: _deviceHeight,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 139, 0, 255),
+              Color.fromARGB(255, 0, 4, 255),
+            ],
+          ),
+        ),
+        child: FutureBuilder<Connector>(
+          future: future_connector,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            } else if (snapshot.hasData) {
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      snapshot.data!.text,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: connector!.fields.keys.map((element) {
+                            return Draggable<String>(
+                              maxSimultaneousDrags: snapshot.data!.answered[
+                                          snapshot.data!.fields[element]] ==
+                                      1
+                                  ? 0
+                                  : 1,
+                              data: element,
+                              child: DraggableWidget(
+                                color: snapshot.data!.answered[
+                                            snapshot.data!.fields[element]] ==
+                                        1
+                                    ? Colors.green
+                                    : Colors.white,
+                                text: element,
+                              ),
+                              feedback: DraggableWidget(
+                                color: Colors.grey,
+                                text: element,
+                              ),
+                              childWhenDragging: const DraggableWidget(
+                                color: Colors.transparent,
+                                text: "?",
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: connector!.anchors
+                              .map((element) => _buildDragTarget(element))
+                              .toList(),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDragTarget(element) {
+    return DragTarget<String>(
+      builder: (BuildContext context, List<String?> incoming, List rejected) {
+        if (connector!.answered[element] != 0) {
+          return Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Container(
+              color:
+                  connector!.answered[element] == 1 ? Colors.green : Colors.red,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  element,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20),
+                ),
+              ),
+              height: MediaQuery.of(context).size.height / 12,
+              width: MediaQuery.of(context).size.width * 0.4,
+            ),
+          );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height / 12,
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  element,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20),
+                ),
+              ),
+            ),
+          );
+        }
+      },
+      onWillAccept: (data) {
+        return connector!.answered[element] == 0;
+      },
+      onAccept: (data) {
+        setState(() {
+          connector!.answered.update(
+              element, (value) => connector!.fields[data] == element ? 1 : -1);
+        });
+      },
+      onLeave: (data) {},
+    );
+  }
+}
