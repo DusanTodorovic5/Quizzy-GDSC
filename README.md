@@ -1,16 +1,12 @@
-# quizzy
+# Quizzy-GDSC
 
-A new Flutter project.
+Flutter example application used for GDSC lecture on Google's Flutter's Day Workshop
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
+This project features fully functional quiz application with 2 modes
 
-A few resources to get you started if this is your first Flutter project:
+ - Quiz mode - where you can answer questions
+ - Connect mode - where you drag the field from left to corresponding field to the right
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Android users can check the app at [google play](https://play.google.com/store/apps/details?id=com.Duke.quizzy)
