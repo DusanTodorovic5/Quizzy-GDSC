@@ -100,18 +100,24 @@ class _QuestionPageState extends State<QuestionPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Flexible(
-                              child: Text("Question " +
-                                  (widget.questions.indexOf(element) + 1)
-                                      .toString() +
-                                  " :"),
+                              child: Text(
+                                "Question " +
+                                    (widget.questions.indexOf(element) + 1)
+                                        .toString() +
+                                    " :",
+                                textAlign: TextAlign.left,
+                              ),
                             ),
                             const Icon(
                               Icons.close,
                               color: Colors.red,
                             ),
                             Flexible(
-                                child: Text("Correct answer : " +
-                                    element.correctAnswer))
+                              child: Text(
+                                "Correct: " + element.correctAnswer,
+                                textAlign: TextAlign.right,
+                              ),
+                            )
                           ],
                         ),
                       );
