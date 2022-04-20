@@ -67,14 +67,24 @@ class _ConnectPageState extends State<ConnectPage> {
                   children: connector!.fields.keys.map((element) {
                     return Container(
                       decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide()),
-                        ),
+                        border: Border(bottom: BorderSide()),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Flexible(child: Text(element)),
-                          Flexible(child: Text(connector!.fields[element]!)),
+                          Flexible(
+                            child: Text(
+                              element,
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          Flexible(
+                            child: Text(
+                              connector!.fields[element]!,
+                              textAlign: TextAlign.right,
+                            ),
+                          ),
                         ],
                       ),
                     );
