@@ -3,6 +3,7 @@ import 'package:quizzy/classes/category_type.dart';
 import 'package:quizzy/connect_page.dart';
 import 'package:quizzy/question_page.dart';
 import 'package:quizzy/widgets/category.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Menu extends StatefulWidget {
   Menu({Key? key}) : super(key: key);
@@ -42,6 +43,14 @@ class _MenuState extends State<Menu> {
   double _deviceHeight = 0;
   double _deviceWidth = 0;
 
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
@@ -51,12 +60,42 @@ class _MenuState extends State<Menu> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-          backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {},
-          )),
+        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+        elevation: 0,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: Row(
+                children: const [
+                  Icon(Icons.source),
+                  Text('Check out source code!'),
+                ],
+              ),
+              onTap: () => _launchURL("https://github.com/DusanTodorovic5/Quizzy-GDSC"),
+            ),
+            ListTile(
+              title: Row(
+                children: const[
+                  Icon(Icons.flutter_dash),
+                  Text('Check flutter documentation'),
+                ],
+              ),
+              onTap: () => _launchURL("https://docs.flutter.dev/"),
+            ),
+            ListTile(
+              title: Row(
+                children: const [
+                  Icon(Icons.privacy_tip),
+                  Text('Review privacy policy'),
+                ],
+              ),
+              onTap: () => _launchURL("https://dukestudioswp.wordpress.com/privacy-policy-for-quizzy-application/"),
+            ),
+          ],
+        ),
+      ),
       body: Container(
         padding: EdgeInsets.only(bottom: navbar, top: topbar),
         width: _deviceWidth,
