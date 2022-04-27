@@ -4,6 +4,7 @@ import 'package:quizzy/classes/question.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:quizzy/widgets/answer_button.dart';
 import 'package:quizzy/widgets/circle_indicators.dart';
 import 'package:quizzy/widgets/completed_dialog.dart';
 import 'package:quizzy/widgets/error_dialog.dart';
@@ -75,6 +76,12 @@ class _QuestionPageState extends State<QuestionPage> {
         builder: (BuildContext context) {
           return ErrorDialog(questions: widget.questions);
         });
+  }
+
+  void answerSelected(Question question, int answerIndex) {
+    setState(() {
+      question.selectedAnswer = answerIndex;
+    });
   }
 
   @override
@@ -171,8 +178,9 @@ class _QuestionPageState extends State<QuestionPage> {
                                   child: Text(
                                     (itemIndex + 1).toString() + ".",
                                     style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -180,135 +188,30 @@ class _QuestionPageState extends State<QuestionPage> {
                                   child: Text(
                                     widget.questions[itemIndex].text,
                                     style: const TextStyle(
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Padding(
-                                  // 0
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        widget.questions[itemIndex]
-                                            .selectedAnswer = 0;
-                                      });
-                                    },
-                                    child: Text(
-                                      "A. " +
-                                          widget
-                                              .questions[itemIndex].answers[0],
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: OutlinedButton.styleFrom(
-                                      backgroundColor: widget
-                                                  .questions[itemIndex]
-                                                  .selectedAnswer ==
-                                              0
-                                          ? Color.fromARGB(255, 235, 119, 255)
-                                          : Colors.transparent,
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          width: 1.5, color: Colors.black),
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  // 1
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        widget.questions[itemIndex]
-                                            .selectedAnswer = 1;
-                                      });
-                                    },
-                                    child: Text(
-                                      "B. " +
-                                          widget
-                                              .questions[itemIndex].answers[1],
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: OutlinedButton.styleFrom(
-                                      backgroundColor: widget
-                                                  .questions[itemIndex]
-                                                  .selectedAnswer ==
-                                              1
-                                          ? Color.fromARGB(255, 235, 119, 255)
-                                          : Colors.transparent,
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          width: 1.5, color: Colors.black),
-                                    ),
-                                  ),
+                                AnswerButton(
+                                  question: widget.questions[itemIndex],
+                                  index: 0,
+                                  onChanged: answerSelected,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        widget.questions[itemIndex]
-                                            .selectedAnswer = 2;
-                                      });
-                                    },
-                                    child: Text(
-                                      "C. " +
-                                          widget
-                                              .questions[itemIndex].answers[2],
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: OutlinedButton.styleFrom(
-                                      backgroundColor: widget
-                                                  .questions[itemIndex]
-                                                  .selectedAnswer ==
-                                              2
-                                          ? Color.fromARGB(255, 235, 119, 255)
-                                          : Colors.transparent,
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          width: 1.5, color: Colors.black),
-                                    ),
-                                  ),
+                                AnswerButton(
+                                  question: widget.questions[itemIndex],
+                                  index: 1,
+                                  onChanged: answerSelected,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        widget.questions[itemIndex]
-                                            .selectedAnswer = 3;
-                                      });
-                                    },
-                                    child: Text(
-                                      "D. " +
-                                          widget
-                                              .questions[itemIndex].answers[3],
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: OutlinedButton.styleFrom(
-                                      backgroundColor: widget
-                                                  .questions[itemIndex]
-                                                  .selectedAnswer ==
-                                              3
-                                          ? Color.fromARGB(255, 235, 119, 255)
-                                          : Colors.transparent,
-                                      shape: const StadiumBorder(),
-                                      side: const BorderSide(
-                                          width: 1.5, color: Colors.black),
-                                    ),
-                                  ),
+                                AnswerButton(
+                                  question: widget.questions[itemIndex],
+                                  index: 2,
+                                  onChanged: answerSelected,
+                                ),
+                                AnswerButton(
+                                  question: widget.questions[itemIndex],
+                                  index: 3,
+                                  onChanged: answerSelected,
                                 ),
                               ],
                             ),

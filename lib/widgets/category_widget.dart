@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:quizzy/classes/category.dart';
 
 class CategoryWidget extends StatefulWidget {
-  CategoryWidget({Key? key, required this.myCategory, required this.text})
+  CategoryWidget({Key? key, required this.category, required this.text})
       : super(key: key);
 
-  Category myCategory;
+  Category category;
   String text;
 
   bool selected = false;
@@ -43,21 +43,12 @@ class _CategoryWidgetState extends State<CategoryWidget> {
               child: Column(
                 children: [
                   Flexible(
-                      child: widget.selected == true
-                          ? Image.asset(
-                              "assets/categories/" +
-                                  widget.myCategory.name +
-                                  ".png",
-                              fit: BoxFit.fitWidth,
-                              alignment: Alignment.topCenter,
-                            )
-                          : Image.asset(
-                              "assets/categories/" +
-                                  widget.myCategory.name +
-                                  ".png",
-                              fit: BoxFit.fitWidth,
-                              alignment: Alignment.topCenter,
-                            )),
+                    child: Image.asset(
+                      "assets/categories/" + widget.category.name + ".png",
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topCenter,
+                    ),
+                  ),
                   FittedBox(
                     fit: BoxFit.fitWidth,
                     child: Text(
@@ -95,29 +86,21 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                 child: Column(
                   children: [
                     Flexible(
-                        child: widget.selected == true
-                            ? Image.asset(
-                                "assets/categories/" +
-                                    widget.myCategory.name +
-                                    ".png",
-                                fit: BoxFit.fitWidth,
-                                alignment: Alignment.topCenter,
-                              )
-                            : Image.asset(
-                                "assets/categories/" +
-                                    widget.myCategory.name +
-                                    ".png",
-                                fit: BoxFit.fitWidth,
-                                alignment: Alignment.topCenter,
-                              )),
+                      child: Image.asset(
+                        "assets/categories/" + widget.category.name + ".png",
+                        fit: BoxFit.fitWidth,
+                        alignment: Alignment.topCenter,
+                      ),
+                    ),
                     FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
                         widget.text,
                         style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ],

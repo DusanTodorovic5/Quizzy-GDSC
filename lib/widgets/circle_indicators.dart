@@ -42,7 +42,7 @@ class _CircleIndicatorsState extends State<CircleIndicators> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white),
         color: Color.fromARGB(
-            widget.questions[0].selectedAnswer != -1 ? 255 : 0, 255, 255, 255),
+            widget.questions[i].selectedAnswer != -1 ? 255 : 0, 255, 255, 255),
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),

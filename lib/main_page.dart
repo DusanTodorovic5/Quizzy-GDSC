@@ -10,27 +10,27 @@ class Menu extends StatefulWidget {
 
   List<CategoryWidget> categories = [
     CategoryWidget(
-      myCategory: Category.math,
+      category: Category.math,
       text: "Math",
     ),
     CategoryWidget(
-      myCategory: Category.geography,
+      category: Category.geography,
       text: "Geography",
     ),
     CategoryWidget(
-      myCategory: Category.history,
+      category: Category.history,
       text: "History",
     ),
     CategoryWidget(
-      myCategory: Category.movies,
+      category: Category.movies,
       text: "Movies",
     ),
     CategoryWidget(
-      myCategory: Category.programming,
+      category: Category.programming,
       text: "Programming",
     ),
     CategoryWidget(
-      myCategory: Category.cars,
+      category: Category.cars,
       text: "Cars",
     ),
   ];
@@ -200,7 +200,7 @@ class _MenuState extends State<Menu> {
                             onPressed: () {
                               Map<Category, bool> map = {
                                 for (var v in widget.categories)
-                                  v.myCategory: v.selected
+                                  v.category: v.selected
                               };
                               openPage(
                                 QuestionPage(
@@ -235,7 +235,7 @@ class _MenuState extends State<Menu> {
                             onPressed: () {
                               Map<Category, bool> map = {
                                 for (var v in widget.categories)
-                                  v.myCategory: v.selected
+                                  v.category: v.selected
                               };
                               openPage(
                                 ConnectPage(
