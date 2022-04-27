@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quizzy/classes/category.dart';
-import 'package:quizzy/connect_page.dart';
-import 'package:quizzy/question_page.dart';
-import 'package:quizzy/widgets/category_widget.dart';
+import 'classes/category.dart';
+import 'connect_page.dart';
+import 'question_page.dart';
+import 'widgets/category_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Menu extends StatefulWidget {

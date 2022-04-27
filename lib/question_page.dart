@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:quizzy/classes/category.dart';
-import 'package:quizzy/classes/question.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:quizzy/widgets/answer_button.dart';
-import 'package:quizzy/widgets/circle_indicators.dart';
-import 'package:quizzy/widgets/completed_dialog.dart';
-import 'package:quizzy/widgets/error_dialog.dart';
+import 'widgets/answer_button.dart';
+import 'widgets/circle_indicators.dart';
+import 'widgets/completed_dialog.dart';
+import 'widgets/error_dialog.dart';
+import 'classes/category.dart';
+import 'classes/question.dart';
 
 class QuestionPage extends StatefulWidget {
   QuestionPage({Key? key, required this.categories}) : super(key: key) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzy/classes/question.dart';
+import '../classes/question.dart';
 
 class CompletedDialog extends StatefulWidget {
   CompletedDialog({Key? key, required this.questions}) : super(key: key);

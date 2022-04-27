@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:quizzy/classes/category.dart';
-import 'package:quizzy/classes/connector.dart';
-import 'package:quizzy/widgets/draggable_widget.dart';
-import 'package:quizzy/widgets/non_draggable_widget.dart';
+
+import 'classes/category.dart';
+import 'classes/connector.dart';
+import 'widgets/draggable_widget.dart';
+import 'widgets/non_draggable_widget.dart';
 
 class ConnectPage extends StatefulWidget {
   ConnectPage({Key? key, required this.categories}) : super(key: key);

@@ -1,4 +1,4 @@
-import 'package:quizzy/classes/category.dart';
+import 'category.dart';
 
 class Question {
   Question(

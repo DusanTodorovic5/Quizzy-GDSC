@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzy/classes/category.dart';
+import '../classes/category.dart';
 
 class CategoryWidget extends StatefulWidget {
   CategoryWidget({Key? key, required this.category, required this.text})
