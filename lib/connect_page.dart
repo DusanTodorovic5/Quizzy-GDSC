@@ -5,6 +5,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:quizzy/classes/category.dart';
 import 'package:quizzy/classes/connector.dart';
 import 'package:quizzy/widgets/draggable_widget.dart';
+import 'package:quizzy/widgets/non_draggable_widget.dart';
 
 class ConnectPage extends StatefulWidget {
   ConnectPage({Key? key, required this.categories}) : super(key: key);
@@ -19,12 +20,12 @@ class _ConnectPageState extends State<ConnectPage> {
   double _deviceHeight = 0;
   double _deviceWidth = 0;
 
-  late final Future<Connector> future_connector;
-  Connector? connector;
+  late final Future<Connector> futureConnector;
+  late Connector connector;
 
   @override
   void initState() {
-    future_connector = loadConnects();
+    futureConnector = loadConnects();
     super.initState();
   }
 
@@ -46,7 +47,7 @@ class _ConnectPageState extends State<ConnectPage> {
 
     allConnectors.shuffle();
     connector = allConnectors.take(1).toList()[0];
-    return connector!;
+    return connector;
   }
 
   void showAnswers(BuildContext context) {
@@ -64,7 +65,7 @@ class _ConnectPageState extends State<ConnectPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: connector!.fields.keys.map((element) {
+                  children: connector.fields.keys.map((element) {
                     return Container(
                       decoration: const BoxDecoration(
                         border: Border(bottom: BorderSide()),
@@ -81,7 +82,7 @@ class _ConnectPageState extends State<ConnectPage> {
                           ),
                           Flexible(
                             child: Text(
-                              connector!.fields[element]!,
+                              connector.fields[element]!,
                               textAlign: TextAlign.right,
                             ),
                           ),
@@ -141,7 +142,7 @@ class _ConnectPageState extends State<ConnectPage> {
           ),
         ),
         child: FutureBuilder<Connector>(
-          future: future_connector,
+          future: futureConnector,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
@@ -179,13 +180,17 @@ class _ConnectPageState extends State<ConnectPage> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: connector!.fields.keys.map((element) {
-                            return Draggable<String>(
-                              maxSimultaneousDrags: snapshot.data!.answered[
+                          children: connector.fields.keys.map((element) {
+                            if (snapshot.data!
+                                    .answered[snapshot.data!.fields[element]] !=
+                                0) {
+                              return NonDraggableWidget(
+                                  text: element,
+                                  correct: snapshot.data!.answered[
                                           snapshot.data!.fields[element]] ==
-                                      1
-                                  ? 0
-                                  : 1,
+                                      1);
+                            }
+                            return Draggable<String>(
                               data: element,
                               child: DraggableWidget(
                                 color: snapshot.data!.answered[
@@ -209,7 +214,7 @@ class _ConnectPageState extends State<ConnectPage> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: connector!.anchors
+                          children: connector.anchors
                               .map((element) => _buildDragTarget(element))
                               .toList(),
                         )
@@ -232,12 +237,11 @@ class _ConnectPageState extends State<ConnectPage> {
   Widget _buildDragTarget(element) {
     return DragTarget<String>(
       builder: (BuildContext context, List<String?> incoming, List rejected) {
-        if (connector!.answered[element] != 0) {
+        if (connector.answered[element] == 1) {
           return Padding(
             padding: const EdgeInsets.all(3.0),
             child: Container(
-              color:
-                  connector!.answered[element] == 1 ? Colors.green : Colors.red,
+              color: Colors.green,
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
@@ -268,12 +272,12 @@ class _ConnectPageState extends State<ConnectPage> {
         }
       },
       onWillAccept: (data) {
-        return connector!.answered[element] == 0;
+        return connector.answered[element] != 1;
       },
       onAccept: (data) {
         setState(() {
-          connector!.answered.update(
-              element, (value) => connector!.fields[data] == element ? 1 : -1);
+          connector.answered.update(connector.fields[data]!,
+              (value) => connector.fields[data] == element ? 1 : -1);
         });
       },
       onLeave: (data) {},
