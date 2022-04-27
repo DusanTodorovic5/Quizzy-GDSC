@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:quizzy/classes/category_type.dart';
+import 'package:quizzy/classes/category.dart';
 import 'package:quizzy/classes/question.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:quizzy/widgets/circle_indicators.dart';
+import 'package:quizzy/widgets/completed_dialog.dart';
+import 'package:quizzy/widgets/error_dialog.dart';
 
 class QuestionPage extends StatefulWidget {
   QuestionPage({Key? key, required this.categories}) : super(key: key) {
@@ -12,13 +14,13 @@ class QuestionPage extends StatefulWidget {
   }
 
   List<Question> questions = [
-    Question(text: "", answers: [""], category: CategoryType.math),
-    Question(text: "", answers: [""], category: CategoryType.math),
-    Question(text: "", answers: [""], category: CategoryType.math),
-    Question(text: "", answers: [""], category: CategoryType.math),
-    Question(text: "", answers: [""], category: CategoryType.math),
+    Question(text: "", answers: [""], category: Category.math),
+    Question(text: "", answers: [""], category: Category.math),
+    Question(text: "", answers: [""], category: Category.math),
+    Question(text: "", answers: [""], category: Category.math),
+    Question(text: "", answers: [""], category: Category.math),
   ];
-  Map<CategoryType, bool> categories;
+  Map<Category, bool> categories;
   @override
   State<QuestionPage> createState() => _QuestionPageState();
 
@@ -62,71 +64,7 @@ class _QuestionPageState extends State<QuestionPage> {
         context: context,
         barrierDismissible: true,
         builder: (BuildContext context) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-            child: AlertDialog(
-              title: const Text("Results"),
-              content: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: widget.questions.map((element) {
-                    if (element.checkCorrect()) {
-                      return Container(
-                        decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide()),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Text("Question " +
-                                  (widget.questions.indexOf(element) + 1)
-                                      .toString() +
-                                  " :"),
-                            ),
-                            const Icon(Icons.check, color: Colors.green),
-                          ],
-                        ),
-                      );
-                    } else {
-                      return Container(
-                        decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide()),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                "Question " +
-                                    (widget.questions.indexOf(element) + 1)
-                                        .toString() +
-                                    " :",
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            const Icon(
-                              Icons.close,
-                              color: Colors.red,
-                            ),
-                            Flexible(
-                              child: Text(
-                                "Correct: " + element.correctAnswer,
-                                textAlign: TextAlign.right,
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    }
-                  }).toList(),
-                ),
-              ),
-            ),
-          );
+          return CompletedDialog(questions: widget.questions);
         });
   }
 
@@ -135,74 +73,7 @@ class _QuestionPageState extends State<QuestionPage> {
         context: context,
         barrierDismissible: true,
         builder: (BuildContext context) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-            child: AlertDialog(
-              title: const Text("Please answer all questions"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Text("Question 1 : "),
-                      widget.questions[0].selectedAnswer != -1
-                          ? const Icon(Icons.check, color: Colors.blue)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.yellow,
-                            )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Question 2 : "),
-                      widget.questions[1].selectedAnswer != -1
-                          ? const Icon(Icons.check, color: Colors.blue)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.yellow,
-                            )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Question 3 : "),
-                      widget.questions[2].selectedAnswer != -1
-                          ? const Icon(Icons.check, color: Colors.blue)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.yellow,
-                            )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Question 4 : "),
-                      widget.questions[3].selectedAnswer != -1
-                          ? const Icon(Icons.check, color: Colors.blue)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.yellow,
-                            )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Question 5 : "),
-                      widget.questions[4].selectedAnswer != -1
-                          ? const Icon(Icons.check, color: Colors.blue)
-                          : const Icon(
-                              Icons.close,
-                              color: Colors.yellow,
-                            )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
+          return ErrorDialog(questions: widget.questions);
         });
   }
 
@@ -260,167 +131,7 @@ class _QuestionPageState extends State<QuestionPage> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AnimatedContainer(
-                  margin: const EdgeInsets.all(10),
-                  duration: const Duration(milliseconds: 500),
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Center(
-                      child: widget.questions[0].selectedAnswer != -1
-                          ? const Icon(
-                              Icons.check,
-                              color: Colors.green,
-                            )
-                          : const Text(
-                              "1",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
-                            ),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Color.fromARGB(
-                        widget.questions[0].selectedAnswer != -1 ? 255 : 0,
-                        255,
-                        255,
-                        255),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                ),
-                AnimatedContainer(
-                  margin: const EdgeInsets.all(10),
-                  duration: const Duration(milliseconds: 500),
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Center(
-                      child: widget.questions[1].selectedAnswer != -1
-                          ? const Icon(
-                              Icons.check,
-                              color: Colors.green,
-                            )
-                          : const Text(
-                              "2",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
-                            ),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Color.fromARGB(
-                        widget.questions[1].selectedAnswer != -1 ? 255 : 0,
-                        255,
-                        255,
-                        255),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                ),
-                AnimatedContainer(
-                  margin: const EdgeInsets.all(10),
-                  duration: const Duration(milliseconds: 500),
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Center(
-                      child: widget.questions[2].selectedAnswer != -1
-                          ? const Icon(
-                              Icons.check,
-                              color: Colors.green,
-                            )
-                          : const Text(
-                              "3",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
-                            ),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Color.fromARGB(
-                        widget.questions[2].selectedAnswer != -1 ? 255 : 0,
-                        255,
-                        255,
-                        255),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                ),
-                AnimatedContainer(
-                  margin: const EdgeInsets.all(10),
-                  duration: const Duration(milliseconds: 500),
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Center(
-                      child: widget.questions[3].selectedAnswer != -1
-                          ? const Icon(
-                              Icons.check,
-                              color: Colors.green,
-                            )
-                          : const Text(
-                              "4",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
-                            ),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Color.fromARGB(
-                        widget.questions[3].selectedAnswer != -1 ? 255 : 0,
-                        255,
-                        255,
-                        255),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                ),
-                AnimatedContainer(
-                  margin: const EdgeInsets.all(10),
-                  duration: const Duration(milliseconds: 500),
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Center(
-                      child: widget.questions[4].selectedAnswer != -1
-                          ? const Icon(
-                              Icons.check,
-                              color: Colors.green,
-                            )
-                          : const Text(
-                              "5",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25),
-                            ),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Color.fromARGB(
-                        widget.questions[4].selectedAnswer != -1 ? 255 : 0,
-                        255,
-                        255,
-                        255),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            CircleIndicators(questions: widget.questions),
             FutureBuilder<List<Question>>(
               future: questions,
               builder: (context, snapshot) {
@@ -441,167 +152,168 @@ class _QuestionPageState extends State<QuestionPage> {
                       itemBuilder: (BuildContext context, int itemIndex,
                           int pageViewIndex) {
                         return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: const EdgeInsets.symmetric(horizontal: 2.0),
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 6,
+                          width: MediaQuery.of(context).size.width,
+                          margin: const EdgeInsets.symmetric(horizontal: 2.0),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30))),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 10, top: 10),
+                                  child: Text(
+                                    (itemIndex + 1).toString() + ".",
+                                    style: const TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, top: 10),
-                                    child: Text(
-                                      (itemIndex + 1).toString() + ".",
-                                      style: const TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(12),
+                                  child: Text(
+                                    widget.questions[itemIndex].text,
+                                    style: const TextStyle(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(12),
+                                ),
+                                Padding(
+                                  // 0
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        widget.questions[itemIndex]
+                                            .selectedAnswer = 0;
+                                      });
+                                    },
                                     child: Text(
-                                      widget.questions[itemIndex].text,
+                                      "A. " +
+                                          widget
+                                              .questions[itemIndex].answers[0],
                                       style: const TextStyle(
+                                          color: Colors.black,
                                           fontSize: 21,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                  Padding(
-                                    // 0
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          widget.questions[itemIndex]
-                                              .selectedAnswer = 0;
-                                        });
-                                      },
-                                      child: Text(
-                                        "A. " +
-                                            widget.questions[itemIndex]
-                                                .answers[0],
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 21,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: widget
-                                                    .questions[itemIndex]
-                                                    .selectedAnswer ==
-                                                0
-                                            ? Color.fromARGB(255, 235, 119, 255)
-                                            : Colors.transparent,
-                                        shape: const StadiumBorder(),
-                                        side: const BorderSide(
-                                            width: 1.5, color: Colors.black),
-                                      ),
+                                    style: OutlinedButton.styleFrom(
+                                      backgroundColor: widget
+                                                  .questions[itemIndex]
+                                                  .selectedAnswer ==
+                                              0
+                                          ? Color.fromARGB(255, 235, 119, 255)
+                                          : Colors.transparent,
+                                      shape: const StadiumBorder(),
+                                      side: const BorderSide(
+                                          width: 1.5, color: Colors.black),
                                     ),
                                   ),
-                                  Padding(
-                                    // 1
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          widget.questions[itemIndex]
-                                              .selectedAnswer = 1;
-                                        });
-                                      },
-                                      child: Text(
-                                        "B. " +
-                                            widget.questions[itemIndex]
-                                                .answers[1],
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 21,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: widget
-                                                    .questions[itemIndex]
-                                                    .selectedAnswer ==
-                                                1
-                                            ? Color.fromARGB(255, 235, 119, 255)
-                                            : Colors.transparent,
-                                        shape: const StadiumBorder(),
-                                        side: const BorderSide(
-                                            width: 1.5, color: Colors.black),
-                                      ),
+                                ),
+                                Padding(
+                                  // 1
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        widget.questions[itemIndex]
+                                            .selectedAnswer = 1;
+                                      });
+                                    },
+                                    child: Text(
+                                      "B. " +
+                                          widget
+                                              .questions[itemIndex].answers[1],
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 21,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      backgroundColor: widget
+                                                  .questions[itemIndex]
+                                                  .selectedAnswer ==
+                                              1
+                                          ? Color.fromARGB(255, 235, 119, 255)
+                                          : Colors.transparent,
+                                      shape: const StadiumBorder(),
+                                      side: const BorderSide(
+                                          width: 1.5, color: Colors.black),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          widget.questions[itemIndex]
-                                              .selectedAnswer = 2;
-                                        });
-                                      },
-                                      child: Text(
-                                        "C. " +
-                                            widget.questions[itemIndex]
-                                                .answers[2],
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 21,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: widget
-                                                    .questions[itemIndex]
-                                                    .selectedAnswer ==
-                                                2
-                                            ? Color.fromARGB(255, 235, 119, 255)
-                                            : Colors.transparent,
-                                        shape: const StadiumBorder(),
-                                        side: const BorderSide(
-                                            width: 1.5, color: Colors.black),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        widget.questions[itemIndex]
+                                            .selectedAnswer = 2;
+                                      });
+                                    },
+                                    child: Text(
+                                      "C. " +
+                                          widget
+                                              .questions[itemIndex].answers[2],
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 21,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      backgroundColor: widget
+                                                  .questions[itemIndex]
+                                                  .selectedAnswer ==
+                                              2
+                                          ? Color.fromARGB(255, 235, 119, 255)
+                                          : Colors.transparent,
+                                      shape: const StadiumBorder(),
+                                      side: const BorderSide(
+                                          width: 1.5, color: Colors.black),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          widget.questions[itemIndex]
-                                              .selectedAnswer = 3;
-                                        });
-                                      },
-                                      child: Text(
-                                        "D. " +
-                                            widget.questions[itemIndex]
-                                                .answers[3],
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 21,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: widget
-                                                    .questions[itemIndex]
-                                                    .selectedAnswer ==
-                                                3
-                                            ? Color.fromARGB(255, 235, 119, 255)
-                                            : Colors.transparent,
-                                        shape: const StadiumBorder(),
-                                        side: const BorderSide(
-                                            width: 1.5, color: Colors.black),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: OutlinedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        widget.questions[itemIndex]
+                                            .selectedAnswer = 3;
+                                      });
+                                    },
+                                    child: Text(
+                                      "D. " +
+                                          widget
+                                              .questions[itemIndex].answers[3],
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 21,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      backgroundColor: widget
+                                                  .questions[itemIndex]
+                                                  .selectedAnswer ==
+                                              3
+                                          ? Color.fromARGB(255, 235, 119, 255)
+                                          : Colors.transparent,
+                                      shape: const StadiumBorder(),
+                                      side: const BorderSide(
+                                          width: 1.5, color: Colors.black),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ));
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                     ),
                   );

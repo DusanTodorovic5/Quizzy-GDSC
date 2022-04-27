@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:quizzy/classes/category_type.dart';
+import 'package:quizzy/classes/category.dart';
 
-class Category extends StatefulWidget {
-  Category({required this.myCategory, required this.text});
+class CategoryWidget extends StatefulWidget {
+  CategoryWidget({Key? key, required this.myCategory, required this.text})
+      : super(key: key);
 
-  CategoryType myCategory;
+  Category myCategory;
   String text;
 
   bool selected = false;
   @override
-  State<Category> createState() => _CategoryState();
+  State<CategoryWidget> createState() => _CategoryWidgetState();
 }
 
-class _CategoryState extends State<Category> {
+class _CategoryWidgetState extends State<CategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

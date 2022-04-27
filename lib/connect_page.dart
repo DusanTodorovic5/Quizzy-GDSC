@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:quizzy/classes/category_type.dart';
+import 'package:quizzy/classes/category.dart';
 import 'package:quizzy/classes/connector.dart';
 import 'package:quizzy/widgets/draggable_widget.dart';
 
 class ConnectPage extends StatefulWidget {
   ConnectPage({Key? key, required this.categories}) : super(key: key);
 
-  Map<CategoryType, bool> categories;
+  Map<Category, bool> categories;
 
   @override
   State<ConnectPage> createState() => _ConnectPageState();

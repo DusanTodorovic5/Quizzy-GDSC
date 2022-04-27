@@ -1,4 +1,4 @@
-enum CategoryType {
+enum Category {
   math,
   geography,
   history,

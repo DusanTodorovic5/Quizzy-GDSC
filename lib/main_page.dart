@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:quizzy/classes/category_type.dart';
+import 'package:quizzy/classes/category.dart';
 import 'package:quizzy/connect_page.dart';
 import 'package:quizzy/question_page.dart';
-import 'package:quizzy/widgets/category.dart';
+import 'package:quizzy/widgets/category_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Menu extends StatefulWidget {
   Menu({Key? key}) : super(key: key);
 
-  List<Category> categories = [
-    Category(
-      myCategory: CategoryType.math,
+  List<CategoryWidget> categories = [
+    CategoryWidget(
+      myCategory: Category.math,
       text: "Math",
     ),
-    Category(
-      myCategory: CategoryType.geography,
+    CategoryWidget(
+      myCategory: Category.geography,
       text: "Geography",
     ),
-    Category(
-      myCategory: CategoryType.history,
+    CategoryWidget(
+      myCategory: Category.history,
       text: "History",
     ),
-    Category(
-      myCategory: CategoryType.movies,
+    CategoryWidget(
+      myCategory: Category.movies,
       text: "Movies",
     ),
-    Category(
-      myCategory: CategoryType.programming,
+    CategoryWidget(
+      myCategory: Category.programming,
       text: "Programming",
     ),
-    Category(
-      myCategory: CategoryType.cars,
+    CategoryWidget(
+      myCategory: Category.cars,
       text: "Cars",
     ),
   ];
@@ -73,11 +73,12 @@ class _MenuState extends State<Menu> {
                   Text('Check out source code!'),
                 ],
               ),
-              onTap: () => _launchURL("https://github.com/DusanTodorovic5/Quizzy-GDSC"),
+              onTap: () =>
+                  _launchURL("https://github.com/DusanTodorovic5/Quizzy-GDSC"),
             ),
             ListTile(
               title: Row(
-                children: const[
+                children: const [
                   Icon(Icons.flutter_dash),
                   Text('Check flutter documentation'),
                 ],
@@ -91,7 +92,8 @@ class _MenuState extends State<Menu> {
                   Text('Review privacy policy'),
                 ],
               ),
-              onTap: () => _launchURL("https://dukestudioswp.wordpress.com/privacy-policy-for-quizzy-application/"),
+              onTap: () => _launchURL(
+                  "https://dukestudioswp.wordpress.com/privacy-policy-for-quizzy-application/"),
             ),
           ],
         ),
@@ -196,29 +198,13 @@ class _MenuState extends State<Menu> {
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
                             onPressed: () {
-                              bool hasCategory = false;
-                              for (var v in widget.categories) {
-                                hasCategory = v.selected;
-                                if (hasCategory) break;
-                              }
-                              if (!hasCategory) {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content:
-                                      Text("Please select at least 1 category"),
-                                ));
-                                return;
-                              }
-                              Map<CategoryType, bool> map = {
+                              Map<Category, bool> map = {
                                 for (var v in widget.categories)
                                   v.myCategory: v.selected
                               };
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => QuestionPage(
-                                    categories: map,
-                                  ),
+                              openPage(
+                                QuestionPage(
+                                  categories: map,
                                 ),
                               );
                             },
@@ -247,29 +233,13 @@ class _MenuState extends State<Menu> {
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
                             onPressed: () {
-                              bool hasCategory = false;
-                              for (var v in widget.categories) {
-                                hasCategory = v.selected;
-                                if (hasCategory) break;
-                              }
-                              if (!hasCategory) {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content:
-                                      Text("Please select at least 1 category"),
-                                ));
-                                return;
-                              }
-                              Map<CategoryType, bool> map = {
+                              Map<Category, bool> map = {
                                 for (var v in widget.categories)
                                   v.myCategory: v.selected
                               };
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ConnectPage(
-                                    categories: map,
-                                  ),
+                              openPage(
+                                ConnectPage(
+                                  categories: map,
                                 ),
                               );
                             },
@@ -283,6 +253,28 @@ class _MenuState extends State<Menu> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void openPage(Widget nextPage) {
+    bool hasCategory = false;
+    for (var v in widget.categories) {
+      hasCategory = v.selected;
+      if (hasCategory) break;
+    }
+    if (!hasCategory) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please select at least 1 category"),
+        ),
+      );
+      return;
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => nextPage,
       ),
     );
   }
