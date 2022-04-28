@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/link_tile.dart';
 import 'classes/category.dart';
 import 'connect_page.dart';
 import 'question_page.dart';
@@ -65,36 +66,20 @@ class _MenuState extends State<Menu> {
       ),
       drawer: Drawer(
         child: ListView(
-          children: [
-            ListTile(
-              title: Row(
-                children: const [
-                  Icon(Icons.source),
-                  Text('Check out source code!'),
-                ],
-              ),
-              onTap: () =>
-                  _launchURL("https://github.com/DusanTodorovic5/Quizzy-GDSC"),
-            ),
-            ListTile(
-              title: Row(
-                children: const [
-                  Icon(Icons.flutter_dash),
-                  Text('Check flutter documentation'),
-                ],
-              ),
-              onTap: () => _launchURL("https://docs.flutter.dev/"),
-            ),
-            ListTile(
-              title: Row(
-                children: const [
-                  Icon(Icons.privacy_tip),
-                  Text('Review privacy policy'),
-                ],
-              ),
-              onTap: () => _launchURL(
-                  "https://dukestudioswp.wordpress.com/privacy-policy-for-quizzy-application/"),
-            ),
+          children: const [
+            LinkTile(
+                text: "Check out source code!",
+                link: "https://github.com/DusanTodorovic5/Quizzy-GDSC",
+                icon: Icons.source),
+            LinkTile(
+                text: "Check flutter documentation",
+                link: "https://docs.flutter.dev/",
+                icon: Icons.flutter_dash),
+            LinkTile(
+                text: "Review privacy policy",
+                link:
+                    "https://dukestudioswp.wordpress.com/privacy-policy-for-quizzy-application/",
+                icon: Icons.privacy_tip),
           ],
         ),
       ),
