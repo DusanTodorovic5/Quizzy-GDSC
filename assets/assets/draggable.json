@@ -1,0 +1,86 @@
+[
+    {
+        "Text": "Connect cars manufacturer with country of origin",
+        "Category": "Cars",
+        "Answers": {
+            "BMW": "Germany",
+            "Citroen": "France",
+            "Alfa Romeo": "Italy",
+            "Dacia": "Romania",
+            "Honda": "Japan",
+            "Rover": "United Kingdom",
+            "SAAB": "Sweden",
+            "Dodge": "USA"
+        }
+    },
+    {
+        "Text": "Connect lakes with country",
+        "Category": "Geography",
+        "Answers": {
+            "Baikal": "Russia",
+            "Winnipeg": "Canada",
+            "Marakaibo": "Venezuel",
+            "Eir": "Australia",
+            "Isik Kul": "Kirgistan",
+            "Dongting": "China",
+            "Urmia": "Iran",
+            "Tanganyika": "Kongo"
+        }
+    },
+    {
+        "Text": "Connect events with years",
+        "Category": "History",
+        "Answers": {
+            "WWI": "1914",
+            "Hungarian Revolution": "1919",
+            "Russian Civil War": "1918",
+            "WWII": "1939",
+            "Greek-Turkey war": "1920",
+            "First Moroccan Crisis": "1905",
+            "Spain Civil War": "1936",
+            "Battle of Kosovo": "1389"
+        }
+    },
+    {
+        "Text": "Connect actors with movies",
+        "Category": "Movies",
+        "Answers": {
+            "Bruce Willis": "Die Hard",
+            "Entony Hopkins": "Tor",
+            "Harison Ford": "Star Wars",
+            "Rusle Crow": "Master and Commander",
+            "Al Pacino": "Godfather",
+            "Brad Pitt": "Spying game",
+            "Johnny Depp": "Sleepy Hollow",
+            "Leonardo DiCaprio": "Man with the Iron Mask"
+        }
+    },
+    {
+        "Text": "Connect languages with technologies",
+        "Category": "Programming",
+        "Answers": {
+            "Java": "Spring",
+            "C": "OpenGL",
+            "C++": "Directx",
+            "Javascript": "React",
+            "Dart": "Flutter",
+            "Python": "Flask",
+            "Pascal": "Delphi",
+            "C#": "MAUI"
+        }
+    },
+    {
+        "Text": "Connect mathematicians with discoveries",
+        "Category": "Math",
+        "Answers": {
+            "Fermat": "Probability theory",
+            "Leonhard Euler": "eiπ + 1 = 0",
+            "Carl Friedrich Gauss": "non-Euclidean space",
+            "Isaac Newton": "Infinitesimal calculus.",
+            "Euclid": "Standard Geometry",
+            "Blaise Pascal": "Conic sections and Projective geometry",
+            "Hippasus of Metapontum": "Irational Numbers",
+            "Pierre de Fermat": "Combinatorics"
+        }
+    }
+]
