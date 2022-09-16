@@ -84,6 +84,8 @@ class _QuestionPageState extends State<QuestionPage> {
     });
   }
 
+  CarouselController buttonCarouselController = CarouselController();
+
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
@@ -148,76 +150,130 @@ class _QuestionPageState extends State<QuestionPage> {
                   );
                 } else if (snapshot.hasData) {
                   return Center(
-                    child: CarouselSlider.builder(
-                      options: CarouselOptions(
-                        height: MediaQuery.of(context).size.height * 0.70,
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: false,
-                        autoPlay: false,
-                      ),
-                      itemCount: 5,
-                      itemBuilder: (BuildContext context, int itemIndex,
-                          int pageViewIndex) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: const EdgeInsets.symmetric(horizontal: 2.0),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30))),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 6,
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 10),
-                                  child: Text(
-                                    (itemIndex + 1).toString() + ".",
-                                    style: const TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(12),
-                                  child: Text(
-                                    widget.questions[itemIndex].text,
-                                    style: const TextStyle(
-                                      fontSize: 21,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                AnswerButton(
-                                  question: widget.questions[itemIndex],
-                                  index: 0,
-                                  onChanged: answerSelected,
-                                ),
-                                AnswerButton(
-                                  question: widget.questions[itemIndex],
-                                  index: 1,
-                                  onChanged: answerSelected,
-                                ),
-                                AnswerButton(
-                                  question: widget.questions[itemIndex],
-                                  index: 2,
-                                  onChanged: answerSelected,
-                                ),
-                                AnswerButton(
-                                  question: widget.questions[itemIndex],
-                                  index: 3,
-                                  onChanged: answerSelected,
-                                ),
-                              ],
-                            ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CarouselSlider.builder(
+                          carouselController: buttonCarouselController,
+                          options: CarouselOptions(
+                            height: MediaQuery.of(context).size.height * 0.70,
+                            enlargeCenterPage: true,
+                            enableInfiniteScroll: false,
+                            autoPlay: false,
                           ),
-                        );
-                      },
+                          itemCount: 5,
+                          itemBuilder: (BuildContext context, int itemIndex,
+                              int pageViewIndex) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 2.0),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30))),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 6,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 10),
+                                      child: Text(
+                                        (itemIndex + 1).toString() + ".",
+                                        style: const TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(12),
+                                      child: Text(
+                                        widget.questions[itemIndex].text,
+                                        style: const TextStyle(
+                                          fontSize: 21,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    AnswerButton(
+                                      question: widget.questions[itemIndex],
+                                      index: 0,
+                                      onChanged: answerSelected,
+                                    ),
+                                    AnswerButton(
+                                      question: widget.questions[itemIndex],
+                                      index: 1,
+                                      onChanged: answerSelected,
+                                    ),
+                                    AnswerButton(
+                                      question: widget.questions[itemIndex],
+                                      index: 2,
+                                      onChanged: answerSelected,
+                                    ),
+                                    AnswerButton(
+                                      question: widget.questions[itemIndex],
+                                      index: 3,
+                                      onChanged: answerSelected,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            OutlinedButton(
+                              onPressed: () =>
+                                  buttonCarouselController.previousPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.linear),
+                              child: const Icon(
+                                Icons.arrow_left,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                side: const BorderSide(
+                                    width: 2.0, color: Colors.white),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            OutlinedButton(
+                              onPressed: () =>
+                                  buttonCarouselController.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.linear),
+                              child: const Icon(
+                                Icons.arrow_right,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                shape: const StadiumBorder(),
+                                side: const BorderSide(
+                                    width: 2.0, color: Colors.white),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
                   );
                 } else {
