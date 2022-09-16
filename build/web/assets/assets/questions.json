@@ -1,0 +1,362 @@
+[
+    {
+        "Text": "Find the sum of 111 + 222 + 333",
+        "Category": "Math",
+        "Answers": [
+            "666",
+            "700",
+            "10",
+            "100"
+        ]
+    },
+    {
+        "Text": "Simplify : 3 + 6 x (5 + 4) ÷ 3 - 7",
+        "Category": "Math",
+        "Answers": [
+            "14",
+            "11",
+            "16",
+            "15"
+        ]
+    },
+    {
+        "Text": "What is the volume of a cube which has edges measuring 5cm?",
+        "Category": "Math",
+        "Answers": [
+            "125 centimetres cubed",
+            "130 centimetres cubed",
+            "115 centimetres cubed",
+            "110 centimetres cubed"
+        ]
+    },
+    {
+        "Text": "Geoff thinks of a number. He deducts five from it and then divides the result by three. His answer is 25. What number did he start with?",
+        "Category": "Math",
+        "Answers": [
+            "80",
+            "90",
+            "100",
+            "30"
+        ]
+    },
+    {
+        "Text": "What is nine-tenths of 2000?",
+        "Category": "Math",
+        "Answers": [
+            "1800",
+            "1900",
+            "1700",
+            "1600"
+        ]
+    },
+    {
+        "Text": "The United States bought Alaska from which country?",
+        "Category": "History",
+        "Answers": [
+            "Russia",
+            "Canada",
+            "Mexico",
+            "Sweden"
+        ]
+    },
+    {
+        "Text": "The term “D-Day” refers to the Allied invasion of WHAT during World War II?",
+        "Category": "History",
+        "Answers": [
+            "France",
+            "United Kingdom",
+            "Japan",
+            "Italy"
+        ]
+    },
+    {
+        "Text": "How long did it take to build the Titanic?",
+        "Category": "History",
+        "Answers": [
+            "3 years",
+            "1 years",
+            "2 years",
+            "4 years"
+        ]
+    },
+    {
+        "Text": "How many lifeboats did the Titanic have?",
+        "Category": "History",
+        "Answers": [
+            "20",
+            "30",
+            "25",
+            "35"
+        ]
+    },
+    {
+        "Text": "What was the name of Franz Ferdinand’s assassin?",
+        "Category": "History",
+        "Answers": [
+            "Gavrilo Princip",
+            "Lee Harvey Oswald",
+            "John Wilkies Booth",
+            "Edgar Allan Poe"
+        ]
+    },
+    {
+        "Text": "When did Switzerland officially gain its independence?",
+        "Category": "History",
+        "Answers": [
+            "1648",
+            "1684",
+            "1748",
+            "1784"
+        ]
+    },
+    {
+        "Text": "What liquid substance, invented in 1926, is used in a car's cooling system?",
+        "Category": "History",
+        "Answers": [
+            "Antifreeze",
+            "Diesel",
+            "Syntetic oil",
+            "Luiqid Hydrogen"
+        ]
+    },
+    {
+        "Text": "What was the first feature-length animated movie ever released?",
+        "Category": "Movies",
+        "Answers": [
+            "Snow White and the Seven Dwarfs",
+            "Gone with the Wind",
+            "Citizen Kane",
+            "Matrix 1999"
+        ]
+    },
+    {
+        "Text": "For what movie did Tom Hanks score his first Academy Award nomination?",
+        "Category": "Movies",
+        "Answers": [
+            "Big",
+            "Forrest Gump",
+            "Green Mile",
+            "The Terminal"
+        ]
+    },
+    {
+        "Text": "For what movie did Steven Spielberg win his first Oscar for Best Director?",
+        "Category": "Movies",
+        "Answers": [
+            "Schindler's List",
+            "E.T.",
+            "Shark",
+            "Jurassic Park"
+        ]
+    },
+    {
+        "Text": "What is the highest-grossing R-rated movie of all time?",
+        "Category": "Movies",
+        "Answers": [
+            "Joker",
+            "Deadpool",
+            "The dark knight rises",
+            "La La Land"
+        ]
+    },
+    {
+        "Text": "Who wrote the screenplay for Rocky?",
+        "Category": "Movies",
+        "Answers": [
+            "Sylvester Stallone",
+            "Adrian Grunberg",
+            "Peter MacDonald",
+            "Ted Kotcheff"
+        ]
+    },
+    {
+        "Text": "The Battle of Thermopylae served as the basis of what highly stylized 2006 smash hit swords-and-sandals action flick?",
+        "Category": "Movies",
+        "Answers": [
+            "300",
+            "Gladiator",
+            "Psycho",
+            "300 : Rise of Empire"
+        ]
+    },
+    {
+        "Text": "Who wrote Unix?",
+        "Category": "Programming",
+        "Answers": [
+            "Dennis Ritchie and Ken Thompson",
+            "Bjarne Stroustrup",
+            "Peter MacDonald",
+            "Ted Kotcheff"
+        ]
+    },
+    {
+        "Text": "Who created C language?",
+        "Category": "Programming",
+        "Answers": [
+            "Dennis Ritchie",
+            "Bjarne Stroustrup",
+            "Ken Thompson",
+            "Gvido van Rosum"
+        ]
+    },
+    {
+        "Text": "Who created C++ language?",
+        "Category": "Programming",
+        "Answers": [
+            "Bjarne Stroustrup",
+            "Dennis Ritchie",
+            "Ken Thompson",
+            "Gvido van Rosum"
+        ]
+    },
+    {
+        "Text": "Who created Python language?",
+        "Category": "Programming",
+        "Answers": [
+            "Gvido van Rosum",
+            "Dennis Ritchie",
+            "Bjarne Stroustrup",
+            "Ken Thompson"
+        ]
+    },
+    {
+        "Text": "Who created Java language?",
+        "Category": "Programming",
+        "Answers": [
+            "James Gosling",
+            "Dennis Ritchie",
+            "Bjarne Stroustrup",
+            "Ken Thompson"
+        ]
+    },
+    {
+        "Text": "What is PHP",
+        "Category": "Programming",
+        "Answers": [
+            "Personal Home Page Language",
+            "PHP : hypertext Preprocessor",
+            "Personal hypertext preprocessor",
+            "PHP : Home Page Language"
+        ]
+    },
+    {
+        "Text": "Which country has the largest population in the world?",
+        "Category": "Geography",
+        "Answers": [
+            "China",
+            "Russia",
+            "Australia",
+            "India"
+        ]
+    },
+    {
+        "Text": "What is the name of the longest river in Africa? ",
+        "Category": "Geography",
+        "Answers": [
+            "The Nile River",
+            "The Amazon River",
+            "The Huang He River",
+            "The Misisipi River"
+        ]
+    },
+    {
+        "Text": "What American city is the Golden Gate Bridge located in? ",
+        "Category": "Geography",
+        "Answers": [
+            "San Francisco",
+            "Los Angeles",
+            "New York",
+            "Las Vegas"
+        ]
+    },
+    {
+        "Text": "What is the name of the largest country in the world? ",
+        "Category": "Geography",
+        "Answers": [
+            "Russia",
+            "China",
+            "India",
+            "United Kingdom"
+        ]
+    },
+    {
+        "Text": "What U.S. state is home to no documented poisonous snakes? ",
+        "Category": "Geography",
+        "Answers": [
+            "Alaska",
+            "Washington D.C.",
+            "Alabama",
+            "New Mexico"
+        ]
+    },
+    {
+        "Text": "What is the capital of Canada? ",
+        "Category": "Geography",
+        "Answers": [
+            "Ottawa",
+            "Québec",
+            "Vancouver",
+            "Toronto"
+        ]
+    },
+    {
+        "Text": "How does Google name Android version?",
+        "Category": "GDSC",
+        "Answers": [
+            "Sweets",
+            "Sequence number",
+            "Year of release",
+            "Famouse Places"
+        ]
+    },
+    {
+        "Text": "What is the name of Google's Machine Learning API?",
+        "Category": "GDSC",
+        "Answers": [
+            "TensorFlow",
+            "Deep Learning",
+            "Deep Mind",
+            "OpenVINO"
+        ]
+    },
+    {
+        "Text": "What is not Google's Language?",
+        "Category": "GDSC",
+        "Answers": [
+            "Rust",
+            "Golang",
+            "Dart",
+            "Carbon"
+        ]
+    },
+    {
+        "Text": "What is Google's platform agnostic solution for mobile apps?",
+        "Category": "GDSC",
+        "Answers": [
+            "Flutter",
+            "ReactNative",
+            "Cordova",
+            "Corona"
+        ]
+    },
+    {
+        "Text": "If you would use Google's solution, what database would you use?",
+        "Category": "GDSC",
+        "Answers": [
+            "Firebase",
+            "Kumulos",
+            "Kuzzle",
+            "MongoDB"
+        ]
+    },
+    {
+        "Text": "What is Google Cloud Platform?",
+        "Category": "GDSC",
+        "Answers": [
+            "Cloud Computing Service",
+            "Database",
+            "Machine Learning API",
+            "Network framework"
+        ]
+    }
+]

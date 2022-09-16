@@ -1,16 +1,16 @@
 [
     {
-        "Text": "Connect cars manufacturer with country of origin",
-        "Category": "Cars",
+        "Text": "Connect Google's Technologies",
+        "Category": "GDSC",
         "Answers": {
-            "BMW": "Germany",
-            "Citroen": "France",
-            "Alfa Romeo": "Italy",
-            "Dacia": "Romania",
-            "Honda": "Japan",
-            "Rover": "United Kingdom",
-            "SAAB": "Sweden",
-            "Dodge": "USA"
+            "Flutter": "Cross Platform Dev",
+            "Google Cloud": "Cloud Computing",
+            "TensorFlow": "Machine Learning",
+            "Golang": "Backend Language",
+            "Dart": "Frontend Language",
+            "Angular": "Web Framework",
+            "Firebase": "NoSQL Database",
+            "Admob": "Advertisment Service"
         }
     },
     {
