@@ -251,7 +251,7 @@ class _ConnectPageState extends State<ConnectPage> {
                 ),
               ),
               height: MediaQuery.of(context).size.height / 12,
-              width: MediaQuery.of(context).size.width * 0.4,
+              width: 190,
             ),
           );
         } else {
@@ -260,7 +260,7 @@ class _ConnectPageState extends State<ConnectPage> {
             child: Container(
               color: Colors.white,
               height: MediaQuery.of(context).size.height / 12,
-              width: MediaQuery.of(context).size.width * 0.4,
+              width: 190,
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(

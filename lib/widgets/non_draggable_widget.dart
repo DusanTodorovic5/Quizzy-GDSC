@@ -16,7 +16,7 @@ class NonDraggableWidget extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           height: MediaQuery.of(context).size.height / 12,
-          width: MediaQuery.of(context).size.width * 0.4,
+          width: 190,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
               Radius.circular(8),
