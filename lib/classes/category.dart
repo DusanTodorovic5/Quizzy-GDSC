@@ -2,7 +2,7 @@ enum Category {
   math,
   geography,
   history,
-  cars,
+  gdsc,
   movies,
   programming,
 }

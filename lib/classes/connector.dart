@@ -12,8 +12,8 @@ class Connector {
   factory Connector.fromJson(Map<String, dynamic> _json) {
     Category category = Category.math;
     switch (_json['Category']) {
-      case "Cars":
-        category = Category.cars;
+      case "GDSC":
+        category = Category.gdsc;
         break;
       case "Math":
         category = Category.math;

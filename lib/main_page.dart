@@ -31,8 +31,8 @@ class Menu extends StatefulWidget {
       text: "Programming",
     ),
     CategoryWidget(
-      category: Category.cars,
-      text: "Cars",
+      category: Category.gdsc,
+      text: "GDSC",
     ),
   ];
 
