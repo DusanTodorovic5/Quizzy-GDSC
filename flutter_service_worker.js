@@ -3,15 +3,15 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "index.html": "5144e3f02b954d08904bd1f905608899",
-"/": "5144e3f02b954d08904bd1f905608899",
+  "index.html": "cfaf0371434b484a03eccaa9dc1f17ba",
+"/": "cfaf0371434b484a03eccaa9dc1f17ba",
 "assets/NOTICES": "d94c1e95132207b66ddb0f320fab4f04",
 "assets/AssetManifest.json": "3df9d2c91c287f4c4b6dba9e61cae017",
 "assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
 "assets/assets/draggable.json": "e37701ab0638100d69f0e205067caf05",
 "assets/assets/categories/math.png": "6cbcc20daa5a1d319651139530ecf45e",
 "assets/assets/categories/movies.png": "dc3d4eba3d47837e758d50986ea27dfd",
-"assets/assets/categories/gdsc.png": "2823a1781c19141f9501528c0b18d700",
+"assets/assets/categories/gdsc.png": "20015d442154037bba3a6a3d2853b6c0",
 "assets/assets/categories/history.png": "0a91735c91ad82c41a5e6f0e54e9a642",
 "assets/assets/categories/geography.png": "5b3c051e566fb04800c64a91608ef6e4",
 "assets/assets/categories/programming.png": "013663a91e315505b72835c8c5ec3bab",
@@ -24,7 +24,7 @@ const RESOURCES = {
 "canvaskit/canvaskit.js": "c2b4e5f3d7a3d82aed024e7249a78487",
 "canvaskit/canvaskit.wasm": "4b83d89d9fecbea8ca46f2f760c5a9ba",
 "version.json": "f408fde680d33797b9f924f3492a08b9",
-"main.dart.js": "0f008234b439b504e5fa4e3abd8f523f",
+"main.dart.js": "4024bbe97b8e633caafdf02b3d98794a",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
