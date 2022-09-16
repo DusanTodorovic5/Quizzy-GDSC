@@ -60102,7 +60102,7 @@ case 3:f=d.a(c.cC(0,b))
 e=A.a([],t.JP)
 for(o=J.ao(f),n=t.N,m=t.S,l=t.s;o.t();){k=o.gE(o)
 j=J.aI(k)
-switch(j.j(k,"Category")){case"Cars":i=B.eE
+switch(j.j(k,"Category")){case"GDSC":i=B.eE
 break
 case"Math":i=B.aH
 break
@@ -60209,7 +60209,7 @@ A.EL.prototype={
 H(a,b){return new A.uj(new A.W_(),B.j,B.GM,null)}}
 A.W_.prototype={
 $1(a){var s=null,r=A.abl(s,B.fH)
-return new A.mh(new A.vk(A.a([new A.fP(B.aH,"Math",s),new A.fP(B.eC,"Geography",s),new A.fP(B.eD,"History",s),new A.fP(B.eF,"Movies",s),new A.fP(B.eG,"Programming",s),new A.fP(B.eE,"Cars",s)],t.P9),s),"GDSC Demo Quiz",r,s)},
+return new A.mh(new A.vk(A.a([new A.fP(B.aH,"Math",s),new A.fP(B.eC,"Geography",s),new A.fP(B.eD,"History",s),new A.fP(B.eF,"Movies",s),new A.fP(B.eG,"Programming",s),new A.fP(B.eE,"GDSC",s)],t.P9),s),"GDSC Demo Quiz",r,s)},
 $S:389}
 A.vk.prototype={
 a9(){return new A.Kj(B.l)}}
@@ -60265,7 +60265,7 @@ case 3:o=f.ao(e.a(d.cC(0,b))),n=p.d,m=t.N
 case 4:if(!o.t()){s=5
 break}l=o.gE(o)
 k=J.aI(l)
-switch(k.j(l,"Category")){case"Cars":j=B.eE
+switch(k.j(l,"Category")){case"GDSC":j=B.eE
 break
 case"Math":j=B.aH
 break
@@ -63131,7 +63131,7 @@ B.wc=new A.to(2,"controller")
 B.aH=new A.hE(0,"math")
 B.eC=new A.hE(1,"geography")
 B.eD=new A.hE(2,"history")
-B.eE=new A.hE(3,"cars")
+B.eE=new A.hE(3,"gdsc")
 B.eF=new A.hE(4,"movies")
 B.eG=new A.hE(5,"programming")
 B.NK=new A.BY(0,"scale")
