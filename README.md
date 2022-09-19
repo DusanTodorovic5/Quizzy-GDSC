@@ -1,6 +1,8 @@
 # Quizzy-GDSC
 
-Flutter example application used for GDSC lecture on Google's Flutter's Day Workshop 2022
+Flutter example application used for GDSC lecture on Google's Flutter's Day Workshop 2022.
+
+Demo [Can be checked here](https://dusantodorovic5.github.io/Quizzy-GDSC/#/)
 
 ## Description
 
